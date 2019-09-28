@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <string.h>
+
 /**
- *Add two string second int the end of the first
+ *Adding two string second to the end of the first
  */
 
 void strcat(char *s, char *t);
