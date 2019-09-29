@@ -26,7 +26,8 @@ int main()
 
     printf("Czy jeden na koncu drugiego? %d\n", strend(lancuch1, lancuch2));
 
-    strncpy(lancuch1,lancuch2, 4);
+    //strncat(lancuch1,lancuch2, 4);
+    strncpy(lancuch1, lancuch2, 3);
     printf("%s", lancuch1);
 
     return 0;
@@ -52,7 +53,7 @@ int strend(char *s, char *t)  //5.4 Sprawdzenie czy drugi lancuch jest na koncu 
 
 }
 
-void strncpy(char *strTo, const char *strFrom, int size)  //5.5 Kopiuje okreslona liczne znakow z jednego do drugiego
+void strncat(char *strTo, const char *strFrom, int size)  //5.5 Kopiuje okreslona liczne znakow z jednego do drugiego
 {
     while(*strTo)
     {
@@ -64,4 +65,13 @@ void strncpy(char *strTo, const char *strFrom, int size)  //5.5 Kopiuje okreslon
       if(!(*strTo++ = *strFrom++))return *strTo;
     }
 }
-void
+void strncpy(char *strTo, const char *strFrom, int size)
+{
+    int i = 1;
+   while(*strTo)
+   {
+       if(i++ <= size)*strTo++ = *strFrom++;
+       else *strTo++ = 0;
+   }
+
+}
