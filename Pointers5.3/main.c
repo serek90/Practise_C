@@ -7,7 +7,14 @@
 
 void strcat(char *s, char *t);
 int strend(char *s, char *t);
-char strncpy (char* strTo, const char* strFrom, size_t size);
+void strncpy (char* strTo, const char* strFrom, int size);// zmianic na funkcje zwracajacą char
+void strncat (char* strTo, const char* strFrom, int num);//Funkcja dopisuje pierwsze num znaków z tablicy strFrom na koniec tekstu w tablicy strTo. W przypadku gdy długość strFrom jest mniejsza niż num, funkcja przepisze wszystko.
+int strncmp(const char *s1, const char *s2, size_t n); /*Funkcja strncmp działa podobnie do funkcji strcmp, ale porównuje nie więcej niż początkowe n znaków napisów s1 i s2.
+Funkcja najpierw porównuje ze sobą pierwsze znaki napisów s1 i s2. Jeśli są równe, kontynuuje porównywanie kolejnych par aż do momentu, gdy porównane znaki będą różne, gdy w którymś napisie napotkany zostanie bajt '\0' lub gdy porównane zostanie n pierwszych znaków obu napisów.
+Zwracane wartości
+Funkcja zwraca liczbę całkowitą, która wskazuje na relację między napisami.
+Zwraca 0, gdy napisy są identyczne. Zwraca liczbę dodatnią, gdy na pierwszej pozycji, na której różnią się znaki w napisach s1 i s2, znak w s1 ma większą wartość (jako unsigned char) niż znak w s2. Zwraca liczbę ujemną w przeciwnym przypadku
+*/
 
 int main()
 {
@@ -19,6 +26,8 @@ int main()
 
     printf("Czy jeden na koncu drugiego? %d\n", strend(lancuch1, lancuch2));
 
+    strncpy(lancuch1,lancuch2, 4);
+    printf("%s", lancuch1);
 
     return 0;
 }
@@ -43,5 +52,16 @@ int strend(char *s, char *t)  //5.4 Sprawdzenie czy drugi lancuch jest na koncu 
 
 }
 
-char strncpy(char *strTo, const char *strFrom, size_t size);  //5.5 Kopiuje okreslona liczne znakow z jednego do drugiego
+void strncpy(char *strTo, const char *strFrom, int size)  //5.5 Kopiuje okreslona liczne znakow z jednego do drugiego
+{
+    while(*strTo)
+    {
+        strTo++;
+    }
 
+    for(int i = 0; i < size; i++)
+    {
+      if(!(*strTo++ = *strFrom++))return *strTo;
+    }
+}
+void
