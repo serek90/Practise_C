@@ -53,7 +53,7 @@ int strend(char *s, char *t)  //5.4 Sprawdzenie czy drugi lancuch jest na koncu 
 
 }
 
-void strncat(char *strTo, const char *strFrom, int size)  //5.5 Kopiuje okreslona liczne znakow z jednego do drugiego
+void strncat(char *strTo, const char *strFrom, int size)  //5.5 Kopiuje okreslona liczne znakow z jednego na koniec drugiego
 {
     while(*strTo)
     {
@@ -65,7 +65,8 @@ void strncat(char *strTo, const char *strFrom, int size)  //5.5 Kopiuje okreslon
       if(!(*strTo++ = *strFrom++))return *strTo;
     }
 }
-void strncpy(char *strTo, const char *strFrom, int size)
+
+void strncpy(char *strTo, const char *strFrom, int size)  //5.5 Kopiuje okreslona liczba znakow z jednoego do druiego a reszta to \0
 {
     int i = 1;
    while(*strTo)
@@ -73,5 +74,10 @@ void strncpy(char *strTo, const char *strFrom, int size)
        if(i++ <= size)*strTo++ = *strFrom++;
        else *strTo++ = 0;
    }
+
+}
+
+int strncmp(char *strTo, char *strTo, int size)
+{
 
 }
