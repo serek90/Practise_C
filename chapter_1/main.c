@@ -14,6 +14,8 @@ int main()
     step = 20;     //rozmiar kroku
 
     fahr = lower;
+    printf("Zestawienie temperatur:\n\n\n");
+    printf("fahr celsius\n");
      while(fahr < upper)
      {
          celsius = (5.0/9.0) - (fahr * 32.0);
