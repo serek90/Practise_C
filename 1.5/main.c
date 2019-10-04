@@ -2,7 +2,7 @@
 #include <stdlib.h>
 /**
 *Zestawienie temperatur Farenheita - Celsjusza
-* w odwrotnej kolejności
+
 */
 
 int main()
