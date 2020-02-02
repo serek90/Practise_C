@@ -61,37 +61,58 @@ int textAnalyze(const char* text, struct report* analyzed)
         printf("%c", *text);
         //printf("%x\n", *text);
 
-        if (((*text == 0x20) ||  (*text == '\n') || (*text == '\t') || (*text == 0x3b) || (*text == 0x2c) ) && lastLetter == 0) // spacja
+        if (((*text == 0x20) ||  (*text == '\n') || (*text == '\t') || (*text == 0x3b) || (*text == 0x2c) ) && lastLetter != 0) // spacja
         {
-            if (letter < shortWord) shortWord = letter;
-            else if (letter > longWord)
-            {longWord = letter;
-            printf("%d\n", longWord);
+
+            if(lastLetter = 1)
+            {
+               if (letter < shortWord) shortWord = letter;
+               else if (letter > longWord)
+               longWord = letter;
+               word++;
+               printf("%d", word);
             }
 
-            lastLetter = 1;
+
+            lastLetter = 0;
 
             letter = 0;
             (*analyzed).wordCount++;
-            word++;
+
+
+
 
         }
-        else if (((*text == 0x21) || (*text == 0x2e) || (*text == 0x3f)) && lastLetter == 0 )
+        else if (((*text == 0x21) || (*text == 0x2e) || (*text == 0x3f)) && lastLetter != 0 )
         {
-            if (word < shortSentence) shortSentence = word;
-            else if (word > longSentence) longSentence = word;
+            if(lastLetter == 1)
+            {
+                word++;
+                if (word < shortSentence) shortSentence = word;
+                else if (word > longSentence)
+                    longSentence = word;
 
-            lastLetter = 1;
+            }
+
+
+
+            lastLetter = 0;
 
             word = 0;   //Zeruj licznik
             letter = 0;
             analyzed->sentenceCount++;  // Counts sentences
+            (*analyzed).wordCount++;
         }
 
         else if(((*text >= 0x41) && (*text <= 0x5a))  || ((*text >= 0x60) && (*text <= 0x7a)))
         {
            letter++;
-           lastLetter=0;
+           lastLetter = 1;
+        }
+        else if ((*text >= 0x30) && (*text <= 0x39))
+        {
+
+            lastLetter = 2;
         }
 
 
