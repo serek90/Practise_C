@@ -1,4 +1,5 @@
 /*
+*BruXOR on ctflearn.com
 *There is a technique called bruteforce. Message: q{vpln'bH_varHuebcrqxetrHOXEj No key! Just brute .. brute .. brute ... :D
 *
 *Program to find flag of the ctflearn.com problem  BruXOR
