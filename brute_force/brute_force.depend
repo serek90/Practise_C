@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1586873530 source:c:\users\pc\documents\github\practise\brute_force\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
