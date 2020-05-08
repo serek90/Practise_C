@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1588964703 source:c:\users\pc\documents\github\practise\quick-find\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
