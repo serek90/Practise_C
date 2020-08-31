@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1593341996 source:c:\users\pc\documents\github\practise\algorytmy\arrays\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arr.h"
+
+1593342906 source:c:\users\pc\documents\github\practise\algorytmy\arrays\arr.c
+	<stdio.h>
+	<stdlib.h>
+	"arr.h"
+
+1593343059 c:\users\pc\documents\github\practise\algorytmy\arrays\arr.h
+
+1593342293 source:c:\users\pc\documents\github\practise\algorytmy\arrays\menu.c
+	"menu.h"
+
+1593342293 c:\users\pc\documents\github\practise\algorytmy\arrays\menu.h
+
