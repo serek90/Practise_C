@@ -1,6 +1,0 @@
-# depslib dependency file v1.0
-1585430374 source:c:\users\pc\documents\github\practise\r8_struktury\przyklady\main.c
-	<stdio.h>
-	<stdlib.h>
-	<stdbool.h>
-
