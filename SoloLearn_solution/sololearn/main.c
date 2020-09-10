@@ -7,6 +7,6 @@ int main()
     char* ppp = &a[0];
     *ppp++;
     printf("%c\n",*++ppp);
-    //printf("Hello world!\n");
+
     return 0;
 }
