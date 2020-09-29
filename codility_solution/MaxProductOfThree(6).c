@@ -22,19 +22,19 @@
 int solution(int A[], int N) 
 {
     int theFirst, theSecond, theThird;
-	  int theLast, theNLast;
+	int theLast, theNLast;
     int *ptrA = A;
     
     //afterStart
-	  theFirst = RANGE_MIN; 
-	  theSecond = RANGE_MIN; 
+    theFirst = RANGE_MIN; 
+    theSecond = RANGE_MIN; 
     theThird = RANGE_MIN;
-	  theLast = RANGE_MAX;
-	  theNLast = RANGE_MAX;
+    theLast = RANGE_MAX;
+    theNLast = RANGE_MAX;
 	
     for(int i = 0; i < N; i++)
     {
-		    //Firt tree elements
+        //Firt tree elements
         if(*ptrA > theFirst)
         {
             theThird = theSecond;
@@ -49,14 +49,14 @@ int solution(int A[], int N)
         else if(*ptrA > theThird) 
             theThird = *ptrA;
 		
-		    //Two smallest elements
-		    if(*ptrA < theLast)
-		    {
-			     theNLast = theLast;
-			     theLast = *ptrA;
-		    }
-		    else if(*ptrA < theNLast)
-			     theNLast = *ptrA;
+        //Two smallest elements
+        if(*ptrA < theLast)
+        {
+		    theNLast = theLast;
+			theLast = *ptrA;
+		}
+		else if(*ptrA < theNLast)
+			theNLast = *ptrA;
        
        ptrA++;
     }
