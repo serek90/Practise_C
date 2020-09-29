@@ -21,45 +21,45 @@
 
 int solution(int A[], int N) 
 {
-    int theFirst, theSecond, theThird;
+	int theFirst, theSecond, theThird;
 	int theLast, theNLast;
-    int *ptrA = A;
+	int *ptrA = A;
     
-    //afterStart
-    theFirst = RANGE_MIN; 
-    theSecond = RANGE_MIN; 
-    theThird = RANGE_MIN;
-    theLast = RANGE_MAX;
-    theNLast = RANGE_MAX;
+	//afterStart
+	theFirst = RANGE_MIN; 
+	theSecond = RANGE_MIN; 
+	theThird = RANGE_MIN;
+	theLast = RANGE_MAX;
+	theNLast = RANGE_MAX;
 	
-    for(int i = 0; i < N; i++)
-    {
-        //Firt tree elements
-        if(*ptrA > theFirst)
-        {
-            theThird = theSecond;
-            theSecond = theFirst;
-            theFirst = *ptrA;
-        }
-        else if(*ptrA > theSecond)
-        {
-            theThird = theSecond;
-            theSecond = *ptrA;
-        }
-        else if(*ptrA > theThird) 
-            theThird = *ptrA;
+	for(int i = 0; i < N; i++)
+	{
+		//Firt tree elements
+		if(*ptrA > theFirst)
+        	{
+            		theThird = theSecond;
+            		theSecond = theFirst;
+            		theFirst = *ptrA;
+        	}
+        	else if(*ptrA > theSecond)
+        	{
+            		theThird = theSecond;
+            		theSecond = *ptrA;
+        	}
+        	else if(*ptrA > theThird) 
+            		theThird = *ptrA;
 		
-        //Two smallest elements
-        if(*ptrA < theLast)
-        {
-		    theNLast = theLast;
+        	//Two smallest elements
+        	if(*ptrA < theLast)
+        	{
+			theNLast = theLast;
 			theLast = *ptrA;
 		}
 		else if(*ptrA < theNLast)
 			theNLast = *ptrA;
        
-       ptrA++;
-    }
+		ptrA++;
+	}
     
 	//Finish
 	if((((theLast * theNLast) > (theThird * theSecond)) || ((theLast * theNLast) > (theThird * theSecond))) && theFirst > 0)
