@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1605640141 source:c:\users\pc\documents\github\practise\inne\polimorfizm_c\main.c
+	<stdio.h>
+	<stdlib.h>
+	"shape.h"
+
+1605640183 c:\users\pc\documents\github\practise\inne\polimorfizm_c\shape.h
+	<stdio.h>
+	<stdlib.h>
+
+1605640183 source:c:\users\pc\documents\github\practise\inne\polimorfizm_c\shape.c
+	"shape.h"
+
+1606000154 source:c:\users\pc\documents\github\practise\polimorfizm_c\main.c
+	<stdio.h>
+	<stdlib.h>
+	"circle.h"
+
+1605997602 c:\users\pc\documents\github\practise\polimorfizm_c\shape.h
+	<stdio.h>
+	<stdlib.h>
+
+1605997064 source:c:\users\pc\documents\github\practise\polimorfizm_c\shape.c
+	"shape.h"
+
+1605999910 c:\users\pc\documents\github\practise\polimorfizm_c\circle.h
+	<stdio.h>
+	<stdlib.h>
+	"shape.h"
+
