@@ -34,6 +34,8 @@ int solution(int A[], int N) {
         tmpPtr++;
 
     }
+    
+    free(tab);
     return nSmallest;
 
 }
