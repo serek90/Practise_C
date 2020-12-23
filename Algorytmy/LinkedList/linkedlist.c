@@ -1,29 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
+/*****************************************
+*Node structure
+*****************************************/
+typedef struct node
 {
    int value;
    struct node *next;
-};
+}Node;
 
-
-typedef struct node node_t;
-
-
+/***************************************
+*Function to print whole node in LinkedList
+*
+*take: head of the linked list
+*
+*return: void
+****************************************/
 void printList(node_t *head)
 {
-   node_t *temporary = head;
+   node_t *tmp = head;
 
    while(temporary != NULL)
    {
-   printf("%d - ", temporary->value);
-   temporary = temporary->next;
+      printf("%d - ", temporary->value);
+      temporary = temporary->next;
    }
-
 }
 
-node_t *create_new_thread(int node_val)
+/***************************************
+*Function to create new node 
+*take: value to new node
+*return pointer to new node
+***************************************/
+node_t *createNewNode(int node_val)
 {
    node_t *new_node=malloc(sizeof(node_t));
    new_node->value = node_val;
@@ -31,16 +41,24 @@ node_t *create_new_thread(int node_val)
    return new_node;
 }
 
-
-node_t *add_node_after(node_t *node, int value)
+/**************************************
+*Function to add node after 
+*
+*
+**************************************/
+node_t *addNodeAfter(node_t *node, int value)
 {
    node_t *new_node = malloc(sizeof(node_t));
    new_node->value = value;
    new_node->next = node->next;
    node->next = new_node;
-
 }
 
+/***************************************
+*Function to find a node when we give a value
+*
+*
+***************************************/
 node_t *find_node(node_t *head, int value)
 {
    node_t *tmp;
@@ -53,6 +71,7 @@ node_t *find_node(node_t *head, int value)
    }
 }
 
+/******************************************/
 int main()
 {
    node_t *head = NULL;
