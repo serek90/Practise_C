@@ -25,8 +25,8 @@ The function should return −1 if the number of pairs of passing cars exceeds 1
 
 int solution(int A[], int N) {
 
-int  one_sum = 0, pair = 0;
-int *ptrA = A;
+  int  one_sum = 0, pair = 0;
+  int *ptrA = A;
 
     for(int i = 0; i < N; i++)
     {

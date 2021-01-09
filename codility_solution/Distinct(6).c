@@ -40,5 +40,7 @@ int tmp;
         ptrA++;
     }
     
+    free(tabPos);
+    free(tabNeg);
     return distinctNum;
 }
