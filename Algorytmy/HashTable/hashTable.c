@@ -87,6 +87,25 @@ bool hashTableInsert(person *p)
 	return true;
 }
 
+/***************************************
+*function to find the person by thier
+*name
+****************************************/
+person *hashTableLookup(char *name)
+{
+	int index = hash(name);
+	if((hashTable[index] != NULL) &&
+	   strncmp(hashTable[index]->name, name, TABLE_SIZE) == 0) // is it the same string???
+	{
+		return hashTable[index];
+	}
+	else
+	{
+		return NULL;
+	}
+
+}
+
 /************************************
 *main function
 ************************************/
@@ -98,12 +117,39 @@ int main()
 	person Jakub = {.name = "Jakub", .age = 25};
 	person Natalia = {.name = "Natalia", .age = 29};
 	person Julia = {.name = "Julia", .age = 24};
+	person Kamil = {.name = "Kamil", .age = 30};
+	person Klementyna = {.name = "Klementyna", .age = 27};
 
 	hashTableInsert(&Jakub);
 	hashTableInsert(&Natalia);
 	hashTableInsert(&Julia);
+	hashTableInsert(&Kamil);
+	hashTableInsert(&Klementyna);
 
 	printHashTable();
+
+	//later printf("Enter name to find in table"):
+
+	person *tmp =  hashTableLookup("Antoni");
+	if(tmp == NULL)
+	{
+		printf("Person  not found in table\n");
+	}
+	else
+	{
+		printf("Found %s\n", tmp->name);
+	}
+
+        tmp =  hashTableLookup("Natalia");
+        if(tmp == NULL)
+        {
+                printf("Person %s not found in table", tmp->name);
+        }
+        else
+        {
+                printf("Found %s\n", tmp->name);
+        }
+
 	/*printf("Jacob => %u\n", hash("Jacob"));
 	printf("Natalie => %u\n", hash("Natalie"));
 	printf("Klementyna => %u\n", hash("Klementyna"));
