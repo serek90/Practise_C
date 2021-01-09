@@ -81,10 +81,16 @@ bool hashTableInsert(person *p)
 {
 	if(p == NULL) return false;
 	int index = hash(p->name);
-	if(hashTable[index] != NULL) return false; //is not empty
-
-	hashTable[index] = p;
-	return true;
+	for(int i =0; i < TABLE_SIZE; i++)
+	{
+		int try = (i + index) % TABLE_SIZE;
+		if(hashTable[try] == NULL) 
+		{
+			hashTable[try] = p;
+			return true;
+		}
+	}
+	return false; // there are not space for new element
 }
 
 /***************************************
@@ -94,17 +100,47 @@ bool hashTableInsert(person *p)
 person *hashTableLookup(char *name)
 {
 	int index = hash(name);
-	if((hashTable[index] != NULL) &&
-	   strncmp(hashTable[index]->name, name, TABLE_SIZE) == 0) // is it the same string???
+
+	for(int i = 0; i < TABLE_SIZE; i++)
 	{
-		return hashTable[index];
-	}
-	else
-	{
-		return NULL;
+		int try = (i + index) % TABLE_SIZE;
+
+		if((hashTable[try] != NULL) &&
+	   	   strncmp(hashTable[try]->name, name, TABLE_SIZE) == 0) // is it the same string???
+		{
+			return hashTable[try];
+		}
 	}
 
+	return NULL;
 }
+
+/************************************
+*delete element from hash table*******
+*
+*
+************************************/
+
+person *hashTableDelete(char *name)
+{
+        int index = hash(name);
+
+	for(int i = 0; i < TABLE_SIZE; i++)
+	{
+		int try = (i + index) % TABLE_SIZE;
+
+        	if((hashTable[try] != NULL) &&
+          	 strncmp(hashTable[try]->name, name, TABLE_SIZE) == 0) // is it the same string???
+       		{
+			person *tmp = hashTable[try];
+			hashTable[try] = NULL;
+                	return tmp;
+       		 }
+	}
+
+        return NULL;
+}
+
 
 /************************************
 *main function
@@ -149,6 +185,20 @@ int main()
         {
                 printf("Found %s\n", tmp->name);
         }
+
+	hashTableDelete("Natalia");
+        tmp =  hashTableLookup("Natalia");
+        if(tmp == NULL)
+        {
+                printf("Person not found in table\n");
+        }
+        else
+        {
+                printf("Found %s\n", tmp->name);
+        }
+
+	printHashTable();
+
 
 	/*printf("Jacob => %u\n", hash("Jacob"));
 	printf("Natalie => %u\n", hash("Natalie"));
