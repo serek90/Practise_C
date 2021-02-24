@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct treeNode
 {
@@ -32,6 +33,7 @@ void print_tabs(int tabs_num)
 	for(int i = 0; i < tabs_num; i++)
 		printf("\t");
 }
+
 /***********************************************
 *Function to print binary tree
 ************************************************/
@@ -57,7 +59,6 @@ void print_binary_tree_rec(treeNode *root, int level)
 
 	print_tabs(level);
 	printf("done\n");
-
 }
 
 void print_binary_tree(treeNode* root)
@@ -65,9 +66,48 @@ void print_binary_tree(treeNode* root)
 	print_binary_tree_rec( root, 0);
 }
 
+bool insert_tree_element(treeNode **rootPtr, int value)
+{
+	treeNode *root = *rootPtr;
+
+	if(root == NULL)
+	{
+		//tree is empty insert first node
+		(*rootPtr) = create_tree_node(value);
+		return true;
+	}
+	if(root->value == value)
+	{
+		//mistake do nothing
+		return false;
+	}
+
+	if(value > root->value)
+	{
+		return insert_tree_element(&(root->right), value);
+	}
+	else
+	{
+		return insert_tree_element(&(root->left), value);
+	}
+}
+
+bool find_tree_number(treeNode * root, int value)
+{
+	if(root == NULL)
+		return false;
+	if(root->value == value)
+		return true;
+
+	if(value  > root->value)
+		find_tree_number(root->right, value);
+	else
+		find_tree_number(root->left, value);
+}
+
 int main()
 {
-	treeNode *node1 = create_tree_node(10);
+	/*treeNode *node1 = create_tree_node(10);
 	treeNode *node2 = create_tree_node(11);
     treeNode *node3 = create_tree_node(12);
     treeNode *node4 = create_tree_node(13);
@@ -79,15 +119,27 @@ int main()
 
 	node2->right = node4;
 	node2->left  = node5;
+	*/
 
-	print_binary_tree(node1);
+	treeNode *rootTree = NULL;
+
+	insert_tree_element(&rootTree, 10);
+	insert_tree_element(&rootTree, 34);
+	insert_tree_element(&rootTree, 3);
+	insert_tree_element(&rootTree, 4);
+	insert_tree_element(&rootTree, 8);
+	insert_tree_element(&rootTree, 76);
+	insert_tree_element(&rootTree, 31);
+	insert_tree_element(&rootTree, 14);
+
+	print_binary_tree(rootTree);
 	
 	//Free every element from the heap;
-	free(node1);
+	/*free(node1);
     free(node2);
     free(node3);
     free(node4);
     free(node5);
-    free(node6);
+    free(node6);*/
 
 }

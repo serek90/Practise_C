@@ -4,6 +4,7 @@
 CC = gcc
 
 all: binaryTree.o
+	$(CC) binaryTree.o -o binaryTree.
 
 binaryTree.o: binaryTree.c 
-	$(CC) -o -Wall binaryTree binaryTree.c
+	$(CC) binaryTree.c 	-c -o binaryTree.o
