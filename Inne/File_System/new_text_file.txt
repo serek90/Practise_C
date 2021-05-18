@@ -1,0 +1,6 @@
+Print some line to file
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Add some line at the end of the file
+Add some line at the end of the file
+Add some line at the end of the file
+Add some line at the end of the file
