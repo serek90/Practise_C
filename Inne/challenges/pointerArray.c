@@ -38,5 +38,8 @@ int main()
 		printf("%s\n", string[i]);
 	}
 
+	for(int i = 0; i < 10; i++)
+		free(string[i]);
+
 	return 0;
 }
