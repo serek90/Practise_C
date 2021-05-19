@@ -16,9 +16,16 @@ int main()
 	for(int i = 0; i < 10; i++)
 	{
 		printf("Please add %d fruit\n", i + 1);
-		scanf("%s", tmp);
+		//scanf("%s", tmp);
+		fgets(tmp, 100, stdin); //fgets get the '\n' at the endo of the string
+
 		stringLen = strlen(tmp);
 		string[i] = (char *) malloc(sizeof(char) * (stringLen +1)); //strlen retunr string lenght witouth '/0'
+		if(string[i] == NULL)
+		{
+			printf("Problem with memory allocation\n");
+			exit(1);
+		}
 		strcpy(string[i], tmp);
 	}
 
@@ -27,7 +34,7 @@ int main()
 
 	for(int i = 0; i < 10; i++)
 	{
-		printf("fruit % - ", i + 1);
+		printf("fruit %d - ", i + 1);
 		printf("%s\n", string[i]);
 	}
 
