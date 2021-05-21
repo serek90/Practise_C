@@ -20,14 +20,14 @@ int main()
 	printf("Enter your last name:\n");
 	lastName = readString();
 
-	puts("\n");
-	puts("Your first name is:");
-	writeString(firstName);
+        strcat(firstName, " ");
+        strcat(firstName, lastName);
 
 	puts("\n");
-	puts("Your last name is:");
-	writeString(lastName);
+	puts("Your are:");
+	writeString(firstName);
 	puts("\n");
+
 	return 0;
 }
 
