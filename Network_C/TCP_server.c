@@ -70,10 +70,10 @@ int main()
 	printf("Socket is opened\n");
 
 	/*************************************
-	*for client connect
+	*bind (for client will be connect)
 	*************************************/
 	printf("Binding socket ...\n");
-	ret = connect(socketfd,
+	ret = bind(socketfd,
 		  resources->ai_addr,
 		  resources->ai_addrlen
 		  );
