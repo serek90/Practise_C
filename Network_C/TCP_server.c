@@ -114,7 +114,44 @@ int main()
 	}
 	printf("Cleint file descriptor is: %d\n", client_fd);
 
+
+	/***********************************
+	*Revicing message from client
+	***********************************/
+	const int buffer_size = 1024;
+	char buffer[buffer_size];
+	ret = recv(client_fd, buffer, buffer_size, 0);
+	if(ret > 0)
+	{
+		printf("Reveived %d bytes\n", ret);
+		printf("--------------------\n");
+		for(int i = 0; i < ret; i++)
+			putchar(buffer[i]);
+	}
+
+	/**********************************
+	*Sending respond to the client
+	***********************************/
+	const char *http_data =
+		"HTTP/1.1 200 OK\r\n"
+		"Connection: close\r\n"
+		"Content-Type:textx/html\r\n\r\n"
+		"<h1>Hello World from server!</h1>";
+
+	ret = send(client_fd, http_data, strlen(http_data), 0);
+	if(ret < 1)
+	{
+		perror("Send failed!\n");
+		exit(1);
+	}
+
+	/***********************************
+	*Close and clean resurces
+	***********************************/
 	printf("\n\n");
+	/* close the client socket */
+	close(client_fd);
+	printf("client file descriptor is closed\n");
 	/* close the socket */
 	close(socketfd);
 	printf("Socket is closed\n");
