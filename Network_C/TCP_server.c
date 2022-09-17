@@ -1,5 +1,5 @@
 /*
-*
+*	test writing address: http://127.0.0.1:2000/ on browser
 *
 *	author: jseroczy(serek90)
 *
@@ -22,7 +22,7 @@ const int SOC_TYPE = SOCK_STREAM; /* TCP */
 int main()
 {
 	/* server information */
-	const char *host = "google.com";
+	const char *host = "127.0.0.1"; /* your machine address */
 	const char *port = "2000"; /* HTTP */
 	//const char *port = "HTTP";
 	int ret;
