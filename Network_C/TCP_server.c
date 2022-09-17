@@ -23,7 +23,7 @@ int main()
 {
 	/* server information */
 	const char *host = "google.com";
-	const char *port = "80"; /* HTTP */
+	const char *port = "2000"; /* HTTP */
 	//const char *port = "HTTP";
 	int ret;
 	struct addrinfo hints, *resources;
@@ -83,6 +83,36 @@ int main()
 		exit(1);
 	}
 	printf("Binding end correctly\n");
+
+	/*************************************
+	* Listen fo incoming connections
+	*************************************/
+	printf("Listening..\n");
+	ret = listen(socketfd,1); //one connection
+	if(ret == -1)
+	{
+		perror("failed\n");
+		exit(1);
+	}
+
+	/*************************************
+	*Accept a new connection
+	*************************************/
+	int client_fd;
+	socklen_t client_len;
+	struct sockaddr client_addr;
+	printf("Accepting new connection\n");
+	client_len = sizeof(client_addr);
+	client_fd = accept(socketfd,
+		&client_addr,
+		&client_len
+		);
+	if(client_fd == -1)
+	{
+		perror("yFailed to accept connection fromclient");
+		exit(1);
+	}
+	printf("Cleint file descriptor is: %d\n", client_fd);
 
 	printf("\n\n");
 	/* close the socket */
