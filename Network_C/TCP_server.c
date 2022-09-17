@@ -38,7 +38,7 @@ int main()
 	hints.ai_socktype = SOC_TYPE;
 
 	/* fill the resource structure */
-	ret = getaddrinfo(host, port, &hints, &resources);
+	ret = getaddrinfo(0, port, &hints, &resources);
 	if(ret)
 	{
 		perror("Failed to get addres info\n");
@@ -135,7 +135,7 @@ int main()
 	const char *http_data =
 		"HTTP/1.1 200 OK\r\n"
 		"Connection: close\r\n"
-		"Content-Type:textx/html\r\n\r\n"
+		"Content-Type:text/html\r\n\r\n"
 		"<h1>Hello World from server!</h1>";
 
 	ret = send(client_fd, http_data, strlen(http_data), 0);
