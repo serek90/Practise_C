@@ -1,25 +1,26 @@
 /*
-* title: Goole interview question
-* problem: You have N namber of bit's sequences of lenght L
-*	find the pairs where the two of sequence are different only for one bite
-*
-*
-* author of solution: jseroczy(serek90-95)
-*/
+ * title: Goole interview question
+ * problem: You have N namber of bit's sequences of lenght L
+ *	    find the pairs where the two of sequence are
+ *          different only for one bite
+ *
+ *
+ * author of solution: jseroczy(serek90-95)
+ */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-#define N 1000  // number ot the byte sequence
-#define L 10    //lenght of bite sequencee
+#define N 60  // number ot the byte sequence
+#define L 8   //lenght of bite sequencee
 
 char *test_str[N];
 
 
-/***********************************
-* Function to prepare entrance bit sequance
-**********************************/
+/************************************************
+* Function to prepare entrance bit sequance     *
+************************************************/
 void prepare_bit_seq()
 {
 	for(int i = 0; i < N; i++)
@@ -29,198 +30,137 @@ void prepare_bit_seq()
 		{
 			test_str[i][j] = rand()%2 + '0';
 		}
-//		printf("%s\n", test_str[i]);
+		printf("%s\n", test_str[i]);
 	}
 }
 
-/*************************************
-*Binary tree to search data
-*************************************/
-struct b_tree
+
+typedef struct node
 {
-	struct b_tree *left;
-	struct b_tree *right;
-	int num;
-	int *same;
-};
+	struct node *next;
+	char *str; //pointer to sequence
+}node_t;
 
-/***********************************
-*Returning struct to linked list and function to fill it
-***********************************/
-struct out
+typedef struct ans
 {
-	int arr[2];
-	struct out *next;
-};
+	char *str_1;
+	char *str_2;
+	struct ans *next;
 
-struct out *head = NULL;
-struct out *curr = NULL;
+}ans_t;
 
-void add_entry(int a, int b)
-{
-	struct out *tmp;
-	tmp = calloc(1, sizeof(struct out));
-	tmp->arr[0] = a;
-	tmp->arr[1] = b;
-
-	if(!head)
-	{
-		head = curr = tmp;
-	}
-	else
-	{
-		curr->next = tmp;
-		curr = curr->next;
-	}
-}
-
-/*****************************************
-* Function tom print answer array
-****************************************/
-void print_ans()
-{
-	struct out *tmp = head;
-	while(tmp)
-	{
-		printf("[ %d , %d ]\n", tmp->arr[0], tmp->arr[1]);
-		tmp = tmp->next;
-	}
-}
-
-/********************************************************************************************************/
-/* Function to find answer and helpful functions                                                        */
-void move_right(struct b_tree **ptr, int num)
-{
-        struct b_tree *tmp =  *ptr;
-
-        if(tmp->right == NULL)
-        {
-                tmp->right = malloc(sizeof(struct b_tree));
-                tmp = tmp->right;
-                tmp->left = NULL;
-                tmp->right = NULL;
-                tmp->num = num;
-                *ptr = NULL;
-        }
-        else
-        {
-                *ptr = tmp->right;
-        }
-}
-
-void move_left(struct b_tree **ptr, int num)
-{
-	struct b_tree *tmp =  *ptr;
-
-	if(tmp->left == NULL)
-	{
-		tmp->left = malloc(sizeof(struct b_tree));
-		tmp = tmp->left;
-		tmp->left = NULL;
-		tmp->right = NULL;
-		tmp->num = num;
-		*ptr = NULL;
-	}
-        else
-	{
-		*ptr = tmp->left;
-	}
-}
+ans_t *head = NULL;
+ans_t *curr = NULL;
 
 /***********************************************
-*Compare two sequence
+*
 ***********************************************/
-void cmp_seq(int num_1, int num_2, int diff_cnt, int lvl)
+void print_ans()
 {
-
-	for(int k = lvl; k < L; k++)
-        {
-		if(test_str[num_1][k] != test_str[num_2][k])
-                {
-			diff_cnt++;
-                        if( diff_cnt > 1) break;
-                }
-        }
-        if(diff_cnt == 1)
-		add_entry(num_1, num_2);
-}
-
-/************************************************
-* Check second branch with one diff
-************************************************/
-void sec_branch_diff(struct b_tree *tmp, int i, int lvl)
-{
-	if(test_str[i][lvl] == '0')
-        {
-        	tmp = tmp->right;
-        }
-        else
-        {
-		tmp = tmp->left;
-        }
-	lvl++;
-
-        while(tmp)
-        {
-		cmp_seq(i, tmp->num, 1, lvl);
-		if(lvl < L - 1)
-		{
-			if(test_str[i][lvl] == '1')
-               		{
-				tmp = tmp->right;
-			}
-			else
-                	{
-				tmp = tmp->left;
-      	      		}
-			lvl++;
-		}
-		else
-			tmp = tmp->right;
-
+	printf("\n\n\n");
+	while(head)
+	{
+		printf("%s\n%s\n\n", head->str_1, head->str_2);
+		head = head->next;
 	}
 }
 
+int compare_bits(char *str1, char *str2)
+{
+	int diff = 0;
+	for(int i = 0; i < L; i++)
+	{
+		diff += (str1[i] != str2[i]);
+		if(diff > 1) return 0;
+	}
+	return diff;
+}
+
+void add_to_arr(node_t *node, char *str)
+{
+	node_t *last;
+	while(node)
+	{
+		last = node;
+		node = node->next;
+	}
+	node_t *tmp = calloc(1, sizeof(node_t));
+	tmp->next = NULL;
+	tmp->str = str;
+  	last->next = tmp;
+}
+
 /************************************************
-*Main searching function
-************************************************/
-void check_bits(char *str_arr[])
+*count bits in sequence                         *
+*************************************************/
+int count_bits(char *str)
+{
+	int bit_ctr = 0;
+	printf("DEBUG: %s\t", str);
+	for(int i = 0; i < strlen(str); i++)
+	{
+		bit_ctr += (str[i] == '1') ? 1 : 0;
+	}
+
+	printf("%d\n", bit_ctr);
+	return bit_ctr;
+}
+
+/************************************************
+*Main searching function                        *
+*************************************************/
+void find_pairs(char *str_arr[])
 {
 	if( N <= 1 || L <= 0)
 		return;
 
-	struct b_tree *root = malloc(sizeof(struct b_tree));
-	root->left = NULL;
-	root->right = NULL;
-	root->num = 0;
-	struct b_tree *tmp;
-	int lvl = 0;
+	node_t **arr = calloc(L + 1, sizeof(node_t *));
 
+	/* divide into group */
         for(int i = 1; i < N; i++)
         {
-		tmp = root;
-		lvl = 0;
-
-		while(tmp)
+		int bit_ctr = count_bits(test_str[i]);
+		if(arr[bit_ctr] == NULL)
 		{
-			cmp_seq(i, tmp->num, 0, lvl);
-			sec_branch_diff(tmp,i, lvl);
+			arr[bit_ctr] = calloc(1, sizeof(node_t));
+			arr[bit_ctr]->next = NULL;
+			arr[bit_ctr]->str = *(test_str + i);
+		}
+		else
+		{
+			add_to_arr(arr[bit_ctr], test_str[i]);
+		}
+	}
 
-			if(lvl < L - 1)
+	/* find pairs */
+	for(int i = 1; i <= L; i++)
+	{
+		node_t *tmp_1 = arr[i - 1];
+		node_t *tmp_2 = arr[i];
+		while(tmp_1)
+		{
+			while(tmp_2)
 			{
-				if(test_str[i][lvl] == '1')
-				{
-					move_right(&tmp, i);
-				}
-				else
-				{
-					move_left(&tmp, i);
-				}
-				lvl++;
+                		if(compare_bits(tmp_1->str, tmp_2->str))
+                		{
+                        		ans_t *tmp = calloc(1, sizeof(ans_t));
+                        		tmp->next = NULL;
+                        		tmp->str_1 = tmp_1->str;
+                        		tmp->str_2 = tmp_2->str;
+                        		if(!head)
+                        		{
+                                		head = tmp;
+                                		curr = head;
+                        		}
+                        		else
+                        		{
+                                		curr->next = tmp;
+                                		curr = tmp;
+                        		}
+                		}
+				tmp_2 = tmp_2->next;
 			}
-			else
-				move_right(&tmp, i);
-
+			tmp_1 = tmp_1->next;
 		}
 	}
 }
@@ -233,8 +173,10 @@ void check_bits(char *str_arr[])
 int main()
 {
 	prepare_bit_seq();
-	check_bits(test_str);
+
+	find_pairs(test_str);
+
 	print_ans();
-//	printf("%d %d", N, L);
+
 	return 0;
 }
